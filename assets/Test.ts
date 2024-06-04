@@ -1,3 +1,5 @@
+import { gc } from "./gc";
+
 const { ccclass, property } = cc._decorator;
 const FontSize = 20;
 @ccclass
@@ -8,6 +10,7 @@ export default class NewClass extends cc.Component {
   @property(cc.SpriteFrame)
   frame: cc.SpriteFrame = null;
   protected onLoad(): void {
+    gc.init({ enable: true, gcReleaseLimitCount: 1, lifeFrame: 10 });
     const root = new cc.Node();
     root.zIndex = 100;
     this.node.addChild(root);
@@ -19,11 +22,11 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "log ref",
+        name: "log frame dyref",
         cb: () => {
           let assets = this.frame.getTexture();
           if (assets) {
-            console.log(assets.refCount);
+            console.log(assets.dynamicRefCount);
           } else {
             console.error("can't get asset");
           }
@@ -34,18 +37,16 @@ export default class NewClass extends cc.Component {
         cb: () => {
           const sprite = this.bgNode.getComponent(cc.Sprite);
           if (sprite) {
-            debugger;
             sprite.spriteFrame = this.frame;
-            sprite.sizeMode = cc.Sprite.SizeMode.CUSTOM;
-            this.bgNode.setContentSize(500, 500);
+            // sprite.sizeMode = cc.Sprite.SizeMode.RAW;
+            // this.bgNode.setContentSize(500, 500);
           }
         },
       },
       {
-        name: "clean spriteFrame",
+        name: "reset spriteFrame",
         cb: () => {
           if (this.bgNode) {
-            this.bgNode.removeFromParent();
             const spr = this.bgNode.getComponent(cc.Sprite);
             if (spr) {
               spr.spriteFrame = null;
@@ -54,7 +55,40 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "clean asset",
+        name: "remove from parent",
+        cb: () => {
+          if (this.bgNode) {
+            this.bgNode.removeFromParent();
+            this.bgNode = null;
+          }
+        },
+      },
+      {
+        name: "replace by loadRes 1.png",
+        cb: () => {
+          cc.loader.loadRes("1.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
+            if (error) {
+            } else {
+              console.log(spriteFrame.getTexture().refCount);
+              this.bgNode.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+              console.log(spriteFrame.getTexture().refCount);
+            }
+          });
+        },
+      },
+      {
+        name: "get 1.png dyref",
+        cb: () => {
+          cc.loader.loadRes("1.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
+            if (error) {
+            } else {
+              console.log(spriteFrame.dynamicRefCount);
+            }
+          });
+        },
+      },
+      {
+        name: "clean frame",
         cb: () => {
           let assets = this.frame.getTexture();
           if (assets) {
@@ -66,7 +100,7 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "2",
+        name: "scene 2",
         cb: () => {
           cc.director.loadScene("2");
         },
