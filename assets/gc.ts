@@ -35,9 +35,23 @@ export class GC {
         return;
       }
       if (asset.dynamicRefCount === 0) {
-        asset.latestFrame;
-        cc.assetManager.releaseAsset(asset);
-        count++;
+        const total = cc.director.getTotalFrames();
+        if (!asset["getLatestRenderFrame"] || typeof asset["getLatestRenderFrame"] !== "function") {
+          debugger;
+          return;
+        }
+        const frame = asset.getLatestRenderFrame();
+        if (frame <= 0) {
+          // 未检索到上次的渲染时间
+          return;
+        }
+        const diff = total - frame;
+        const bRelease = diff > this.opts.lifeFrame;
+        if (bRelease) {
+          console.log("try release: ", asset.name);
+          cc.assetManager.releaseAsset(asset);
+          count++;
+        }
       }
     });
   }
