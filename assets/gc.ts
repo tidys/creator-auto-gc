@@ -27,7 +27,7 @@ export interface GcOptions {
   textureLifeFrame: number;
 
   /**
-   * remove节点是否开启GC
+   * remove节点是否开启GC，因为会带来额外的性能消耗，目前只会在CC_DEBUG环境才会进行检测。
    * 查看处于游离态的节点: cc.pool.removeNodes.log()
    */
   removeNodeEnable: boolean;
@@ -116,16 +116,15 @@ export class GC {
         break;
       }
       const node = nodes[i];
-      if (!node.isValid) {
+      if (!node && !node.isValid) {
         continue;
       }
 
       const diff = total - (node.latestFrame || total);
       const destroy = diff > this.opts.removeNodeLifeFrame;
       if (destroy) {
-        console.log("try remove node: ", node);
-        // @ts-ignore
-        cc.pool.removeNodes.remove(node);
+        cc.log("try remove node: ", node);
+        // 这里面会影响nodes的长度，依旧i++会跳过，可能出现问题
         node.destroy && node.destroy();
         releaseNodeCount++;
       }
@@ -148,6 +147,14 @@ export class GC {
         return;
       }
       if (asset.dynamicRefCount <= 0) {
+        if (
+          asset instanceof cc.Texture2D ||
+          // asset instanceof cc.Prefab || //暂时不检测cc.Prefab类型的资源
+          asset instanceof cc.SpriteFrame
+        ) {
+        } else {
+          // debugger;
+        }
         if (!asset["getLatestRenderFrame"] || typeof asset["getLatestRenderFrame"] !== "function") {
           debugger;
           return;
@@ -156,7 +163,7 @@ export class GC {
         const diff = total - frame;
         const bRelease = diff > this.opts.textureLifeFrame;
         if (bRelease) {
-          console.log("try release: ", asset.name);
+          cc.log("try release texture: ", asset.name);
           cc.assetManager.releaseAsset(asset);
           releaseAssetCount++;
         }

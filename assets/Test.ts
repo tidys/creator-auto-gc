@@ -11,7 +11,7 @@ export default class NewClass extends cc.Component {
   frame: cc.SpriteFrame = null;
   protected onLoad(): void {
     gc.init({
-      enable: true,
+      enable: false,
       cycleFrame: 0,
       textureEnable: true,
       textureLimitCount: 1,
@@ -118,14 +118,13 @@ export default class NewClass extends cc.Component {
       {
         name: "test ondestroy",
         cb: () => {
-          debugger;
           this.bgNode.destroy();
         },
       },
       {
         name: "test active=false",
         cb: () => {
-          cc.loader.loadRes("1.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
+          cc.loader.loadRes("assets_resources.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
             if (error) {
             } else {
               this.bgNode.getComponent(cc.Sprite).spriteFrame = spriteFrame;
@@ -152,6 +151,28 @@ export default class NewClass extends cc.Component {
         name: "test removeAllChildren",
         cb: () => {
           this.bgNode.removeAllChildren();
+        },
+      },
+      {
+        name: "test remove&destroy",
+        cb: () => {
+          this.bgNode.removeFromParent();
+          // @ts-ignore
+          cc.pool.removeNodes.log();
+          this.bgNode.destroy();
+          // @ts-ignore
+          cc.pool.removeNodes.log();
+        },
+      },
+      {
+        name: "test prefab",
+        cb: () => {
+          cc.loader.loadRes("prefab1", cc.Prefab, (error: Error, prefab: cc.Prefab) => {
+            if (error) {
+            } else {
+              this.bgNode.addChild(cc.instantiate(prefab));
+            }
+          });
         },
       },
     ]);
