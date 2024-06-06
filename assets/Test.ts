@@ -10,8 +10,18 @@ export default class NewClass extends cc.Component {
   @property(cc.SpriteFrame)
   frame: cc.SpriteFrame = null;
   protected onLoad(): void {
-    gc.init({ enable: true, gcReleaseLimitCount: 1, lifeFrame: 10 });
+    gc.init({
+      enable: true,
+      cycleFrame: 0,
+      textureEnable: true,
+      textureLimitCount: 1,
+      textureLifeFrame: 10,
+      removeNodeEnable: false,
+      removeNodeLimitCount: 1,
+      removeNodeLifeFrame: 10,
+    });
     const root = new cc.Node();
+    root.name = "buttons";
     root.zIndex = 100;
     this.node.addChild(root);
     this.createButtons(root, [
@@ -103,6 +113,45 @@ export default class NewClass extends cc.Component {
         name: "scene 2",
         cb: () => {
           cc.director.loadScene("2");
+        },
+      },
+      {
+        name: "test ondestroy",
+        cb: () => {
+          debugger;
+          this.bgNode.destroy();
+        },
+      },
+      {
+        name: "test active=false",
+        cb: () => {
+          cc.loader.loadRes("1.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
+            if (error) {
+            } else {
+              this.bgNode.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+              console.log("update spriteFrame success");
+              setTimeout(() => {
+                console.log("hide node");
+                this.bgNode.active = false;
+                setTimeout(() => {
+                  console.log("show node");
+                  this.bgNode.active = true;
+                }, 1000);
+              }, 1000);
+            }
+          });
+        },
+      },
+      {
+        name: "test removeFromParent",
+        cb: () => {
+          this.bgNode.removeFromParent();
+        },
+      },
+      {
+        name: "test removeAllChildren",
+        cb: () => {
+          this.bgNode.removeAllChildren();
         },
       },
     ]);
