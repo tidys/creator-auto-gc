@@ -11,7 +11,7 @@ export default class NewClass extends cc.Component {
   frame: cc.SpriteFrame = null;
   protected onLoad(): void {
     gc.init({
-      enable: false,
+      enable: true,
       cycleFrame: 0,
       textureEnable: true,
       textureLimitCount: 1,
@@ -171,6 +171,42 @@ export default class NewClass extends cc.Component {
             if (error) {
             } else {
               this.bgNode.addChild(cc.instantiate(prefab));
+            }
+          });
+        },
+      },
+      {
+        name: "test dragonbones",
+        cb: () => {},
+      },
+      {
+        name: "test spine",
+        cb: () => {},
+      },
+      {
+        name: "test spriteAtlas",
+        cb: () => {
+          debugger;
+          cc.loader.loadRes("yu", cc.SpriteAtlas, (error: Error, spriteAtlas: cc.SpriteAtlas) => {
+            if (error) {
+              console.log(error);
+            } else {
+              this.bgNode.getComponent(cc.Sprite).spriteFrame = spriteAtlas.getSpriteFrame("yu1");
+            }
+          });
+        },
+      },
+      {
+        name: "test audio",
+        cb: () => {
+          debugger;
+          cc.loader.loadRes("mp3", cc.AudioClip, (error: Error, audioClip: cc.AudioClip) => {
+            if (error) {
+              console.log(error);
+            } else {
+              const audioSource = this.bgNode.addComponent(cc.AudioSource);
+              audioSource.clip = audioClip;
+              audioSource.play();
             }
           });
         },

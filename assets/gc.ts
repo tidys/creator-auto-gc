@@ -147,13 +147,10 @@ export class GC {
         return;
       }
       if (asset.dynamicRefCount <= 0) {
-        if (
-          asset instanceof cc.Texture2D ||
-          // asset instanceof cc.Prefab || //暂时不检测cc.Prefab类型的资源
-          asset instanceof cc.SpriteFrame
-        ) {
+        if (asset instanceof cc.Texture2D || asset instanceof cc.SpriteFrame) {
         } else {
-          // debugger;
+          // asset instanceof cc.Prefab || //暂时不检测cc.Prefab类型的资源
+          return;
         }
         if (!asset["getLatestRenderFrame"] || typeof asset["getLatestRenderFrame"] !== "function") {
           debugger;
