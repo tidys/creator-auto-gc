@@ -31,6 +31,29 @@
       "borderRight": 0,
       "spriteType": "normal",
       "subMetas": {}
+    },
+    "yu2.png": {
+      "ver": "1.0.6",
+      "uuid": "e2c142bb-497c-4836-9069-571ae8ce1c37",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "c54d45f1-9567-4ddd-bf5a-e618cc91b1b1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 407,
+      "trimY": 0,
+      "width": 100,
+      "height": 69,
+      "rawWidth": 100,
+      "rawHeight": 69,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
     }
   }
 }

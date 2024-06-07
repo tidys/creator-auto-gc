@@ -147,7 +147,7 @@ export class GC {
         return;
       }
       if (asset.dynamicRefCount <= 0) {
-        if (asset instanceof cc.Texture2D || asset instanceof cc.SpriteFrame) {
+        if (asset instanceof cc.Texture2D || asset instanceof cc.SpriteFrame || asset instanceof cc.SpriteAtlas) {
         } else {
           // asset instanceof cc.Prefab || //暂时不检测cc.Prefab类型的资源
           return;
@@ -160,7 +160,7 @@ export class GC {
         const diff = total - frame;
         const bRelease = diff > this.opts.textureLifeFrame;
         if (bRelease) {
-          cc.log("try release texture: ", asset.name);
+          cc.log("try release asset: ", asset.name);
           cc.assetManager.releaseAsset(asset);
           releaseAssetCount++;
         }

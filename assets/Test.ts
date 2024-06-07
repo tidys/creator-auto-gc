@@ -43,6 +43,14 @@ export default class NewClass extends cc.Component {
         },
       },
       {
+        name: "hide sprite",
+        cb: () => {
+          if (this.bgNode) {
+            this.bgNode.active = !this.bgNode.active;
+          }
+        },
+      },
+      {
         name: "set spriteFrame",
         cb: () => {
           const sprite = this.bgNode.getComponent(cc.Sprite);
@@ -74,9 +82,9 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "replace by loadRes 1.png",
+        name: "replace by loadRes",
         cb: () => {
-          cc.loader.loadRes("1.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
+          cc.loader.loadRes("assets_resources.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
             if (error) {
             } else {
               console.log(spriteFrame.getTexture().refCount);
@@ -87,9 +95,9 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "get 1.png dyref",
+        name: "get resources dyref",
         cb: () => {
-          cc.loader.loadRes("1.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
+          cc.loader.loadRes("assets_resources.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
             if (error) {
             } else {
               console.log(spriteFrame.dynamicRefCount);
@@ -184,6 +192,17 @@ export default class NewClass extends cc.Component {
         cb: () => {},
       },
       {
+        name: "test spriteAtlas valid",
+        cb: () => {
+          debugger;
+          if (this.testAtlas) {
+            const frame = this.testAtlas.getSpriteFrame("yu2");
+            const spr = this.bgNode.getComponent(cc.Sprite);
+            spr.spriteFrame = frame;
+          }
+        },
+      },
+      {
         name: "test spriteAtlas",
         cb: () => {
           debugger;
@@ -191,6 +210,7 @@ export default class NewClass extends cc.Component {
             if (error) {
               console.log(error);
             } else {
+              this.testAtlas = spriteAtlas;
               this.bgNode.getComponent(cc.Sprite).spriteFrame = spriteAtlas.getSpriteFrame("yu1");
             }
           });
@@ -213,6 +233,7 @@ export default class NewClass extends cc.Component {
       },
     ]);
   }
+  private testAtlas: cc.SpriteAtlas;
   private createButtons(root: cc.Node, list: Array<{ name: string; cb: Function }>) {
     let widget = root.getComponent(cc.Widget);
     if (!widget) {

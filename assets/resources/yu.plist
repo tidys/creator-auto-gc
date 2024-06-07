@@ -19,6 +19,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>yu2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{100,69}</string>
+                <key>spriteSourceSize</key>
+                <string>{100,69}</string>
+                <key>textureRect</key>
+                <string>{{407,0},{100,69}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>

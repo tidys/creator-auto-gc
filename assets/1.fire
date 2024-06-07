@@ -57,6 +57,7 @@
     "_is3DNode": true,
     "_groupIndex": 0,
     "groupIndex": 0,
+    "latestFrame": 0,
     "autoReleaseAssets": true,
     "_id": "598befe8-cfa6-416f-8c93-edb6a8ccf76a"
   },
@@ -133,6 +134,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
+    "latestFrame": 36860,
     "_id": "4cr5uWz21K9om5PbM0ynuj"
   },
   {
@@ -195,6 +197,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
+    "latestFrame": 36860,
     "_id": "72AFnGHKdER6vvzdwkgKh6"
   },
   {
@@ -297,6 +300,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
+    "latestFrame": 36860,
     "_id": "f0zxONRJ9MfrnO/o0VuM8M"
   },
   {
@@ -355,6 +359,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
+    "latestFrame": 36860,
     "_id": "57nJpaIHNKtLevq1410d86"
   },
   {
@@ -374,7 +379,7 @@
     "_dstBlendFactor": 771,
     "_spriteFrame": null,
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 2,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
