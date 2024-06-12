@@ -125,13 +125,19 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "test ondestroy",
+        name: "self destroy",
         cb: () => {
           this.bgNode.destroy();
         },
       },
       {
-        name: "test active=false",
+        name: "self.children destroy",
+        cb: () => {
+          this.bgNode.destroyAllChildren();
+        },
+      },
+      {
+        name: "test hide&show",
         cb: () => {
           cc.loader.loadRes("assets_resources.png", cc.SpriteFrame, (error: Error, spriteFrame: cc.SpriteFrame) => {
             if (error) {
@@ -186,7 +192,19 @@ export default class NewClass extends cc.Component {
       },
       {
         name: "test dragonbones",
-        cb: () => {},
+        cb: () => {
+          cc.loader.loadRes("db/Prefab_NewDragon", cc.Prefab, (error: Error, prefab: cc.Prefab) => {
+            if (error) {
+              return;
+            } else {
+              const ins = cc.instantiate(prefab);
+              this.bgNode.addChild(ins);
+            }
+          });
+          // const db = new cc.Node();
+          // db.addComponent(cc.DragonBones);
+          // this.bgNode.addChild();
+        },
       },
       {
         name: "test spine",
