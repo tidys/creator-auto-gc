@@ -1,7 +1,7 @@
 import { gc } from "./gc";
 
 const { ccclass, property } = cc._decorator;
-const FontSize = 20;
+const FontSize = 15;
 @ccclass
 export default class NewClass extends cc.Component {
   @property(cc.Node)
@@ -44,9 +44,10 @@ export default class NewClass extends cc.Component {
       },
       {
         name: "hide sprite",
-        cb: () => {
+        cb: (label: cc.Label) => {
           if (this.bgNode) {
             this.bgNode.active = !this.bgNode.active;
+            label.string = this.bgNode.active ? "hide sprite" : "show sprite";
           }
         },
       },
@@ -194,18 +195,22 @@ export default class NewClass extends cc.Component {
       {
         name: "test spriteAtlas valid",
         cb: () => {
-          debugger;
-          if (this.testAtlas) {
-            const frame = this.testAtlas.getSpriteFrame("yu2");
-            const spr = this.bgNode.getComponent(cc.Sprite);
-            spr.spriteFrame = frame;
+          if (!this.testAtlas) {
+            cc.log(`sprite atlas is null`);
+            return;
           }
+
+          if (!this.testAtlas.isValid) {
+            cc.log(`invalid sprite atlas`);
+          }
+          const frame = this.testAtlas.getSpriteFrame("yu2");
+          const spr = this.bgNode.getComponent(cc.Sprite);
+          spr.spriteFrame = frame;
         },
       },
       {
         name: "test spriteAtlas",
         cb: () => {
-          debugger;
           cc.loader.loadRes("yu", cc.SpriteAtlas, (error: Error, spriteAtlas: cc.SpriteAtlas) => {
             if (error) {
               console.log(error);
@@ -234,7 +239,7 @@ export default class NewClass extends cc.Component {
     ]);
   }
   private testAtlas: cc.SpriteAtlas;
-  private createButtons(root: cc.Node, list: Array<{ name: string; cb: Function }>) {
+  private createButtons(root: cc.Node, list: Array<{ name: string; cb: (label?: cc.Label) => void }>) {
     let widget = root.getComponent(cc.Widget);
     if (!widget) {
       widget = root.addComponent(cc.Widget);
@@ -266,7 +271,7 @@ export default class NewClass extends cc.Component {
         node.color = new cc.Color(Math.random() * 255, Math.random() * 255, Math.random() * 255);
       });
       node.on(cc.Node.EventType.TOUCH_END, () => {
-        item.cb && item.cb();
+        item.cb && item.cb(label);
       });
       node.parent = root;
     }
