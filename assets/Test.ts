@@ -191,7 +191,7 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "test dragonbones",
+        name: "test dragonbones prefab",
         cb: () => {
           cc.loader.loadRes("db/Prefab_NewDragon", cc.Prefab, (error: Error, prefab: cc.Prefab) => {
             if (error) {
@@ -201,9 +201,37 @@ export default class NewClass extends cc.Component {
               this.bgNode.addChild(ins);
             }
           });
-          // const db = new cc.Node();
-          // db.addComponent(cc.DragonBones);
-          // this.bgNode.addChild();
+        },
+      },
+      {
+        name: "test dragon load",
+        cb: () => {
+          const file = "db/NewDragon";
+          const createDB = (dbAsset: dragonBones.DragonBonesAsset, atlasAsset: dragonBones.DragonBonesAtlasAsset) => {
+            const db = new cc.Node("db");
+            const comp = db.addComponent(dragonBones.ArmatureDisplay);
+            comp.dragonAsset = dbAsset;
+            comp.dragonAtlasAsset = atlasAsset;
+            comp.enableBatch = true;
+            comp.armatureName = "armatureName";
+            comp.animationName = "stand";
+            comp.playAnimation(comp.animationName, 0);
+            this.bgNode.addChild(db);
+          };
+          cc.loader.loadRes(`${file}_tex`, dragonBones.DragonBonesAtlasAsset, (error1: Error, atlasAsset: dragonBones.DragonBonesAtlasAsset) => {
+            if (error1) {
+              console.log(error1);
+              return;
+            } else {
+              cc.loader.loadRes(`${file}_ske`, dragonBones.DragonBonesAsset, (error2: Error, dbAsset: dragonBones.DragonBonesAsset) => {
+                if (error2) {
+                  console.log(error2);
+                  return;
+                }
+                createDB(dbAsset, atlasAsset);
+              });
+            }
+          });
         },
       },
       {

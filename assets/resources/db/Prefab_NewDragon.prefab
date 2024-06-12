@@ -36,8 +36,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 648.36,
-      "height": 676.96
+      "width": 630.41,
+      "height": 661.62
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -71,11 +71,11 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "latestFrame": 17613,
+    "latestFrame": 49930,
     "_id": ""
   },
   {
-    "__type__": "sp.Skeleton",
+    "__type__": "dragonBones.ArmatureDisplay",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -84,35 +84,33 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "7afd064b-113f-480e-b793-8817d19f63c3"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "paused": false,
-    "defaultSkin": "default",
-    "defaultAnimation": "stand",
+    "_armatureName": "armatureName",
+    "_animationName": "stand",
     "_preCacheMode": 0,
     "_cacheMode": 0,
-    "loop": true,
-    "premultipliedAlpha": true,
-    "timeScale": 1,
+    "playTimes": -1,
+    "premultipliedAlpha": false,
+    "_armatureKey": "f301ce06-b55f-40dd-8546-15087f8fc333#b3c8f7b3-26d6-4974-88a5-1b190184f87d",
     "_accTime": 0,
     "_playCount": 0,
     "_frameCache": null,
     "_curFrame": null,
-    "_skeletonCache": null,
-    "_animationName": "stand",
-    "_animationQueue": [],
-    "_headAniInfo": null,
-    "_playTimes": 0,
-    "_isAniComplete": true,
-    "_N$skeletonData": {
-      "__uuid__": "1735a045-bb3b-426f-8221-254333aa2916"
+    "_playing": false,
+    "_armatureCache": null,
+    "_N$dragonAsset": {
+      "__uuid__": "f301ce06-b55f-40dd-8546-15087f8fc333"
     },
+    "_N$dragonAtlasAsset": {
+      "__uuid__": "b3c8f7b3-26d6-4974-88a5-1b190184f87d"
+    },
+    "_N$_defaultArmatureIndex": 0,
+    "_N$_animationIndex": 1,
     "_N$_defaultCacheMode": 0,
-    "_N$debugSlots": false,
+    "_N$timeScale": 1,
     "_N$debugBones": false,
-    "_N$debugMesh": false,
-    "_N$useTint": false,
     "_N$enableBatch": false,
     "_id": ""
   },
