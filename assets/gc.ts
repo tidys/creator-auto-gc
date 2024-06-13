@@ -147,7 +147,13 @@ export class GC {
         return;
       }
       if (asset.dynamicRefCount <= 0) {
-        if (asset instanceof cc.Texture2D || asset instanceof cc.SpriteFrame || asset instanceof cc.SpriteAtlas) {
+        if (
+          asset instanceof cc.Texture2D || //
+          asset instanceof cc.SpriteFrame ||
+          asset instanceof dragonBones.DragonBonesAtlasAsset ||
+          asset instanceof dragonBones.DragonBonesAsset ||
+          asset instanceof cc.SpriteAtlas
+        ) {
         } else {
           // asset instanceof cc.Prefab || //暂时不检测cc.Prefab类型的资源
           return;

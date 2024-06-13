@@ -207,6 +207,7 @@ export default class NewClass extends cc.Component {
         name: "test dragon load",
         cb: () => {
           const file = "db/NewDragon";
+
           const createDB = (dbAsset: dragonBones.DragonBonesAsset, atlasAsset: dragonBones.DragonBonesAtlasAsset) => {
             const db = new cc.Node("db");
             const comp = db.addComponent(dragonBones.ArmatureDisplay);
@@ -215,6 +216,8 @@ export default class NewClass extends cc.Component {
             comp.enableBatch = true;
             comp.armatureName = "armatureName";
             comp.animationName = "stand";
+            gc.protectAsset(dbAsset, false);
+            gc.protectAsset(atlasAsset, false);
             comp.playAnimation(comp.animationName, 0);
             this.bgNode.addChild(db);
           };
@@ -223,11 +226,13 @@ export default class NewClass extends cc.Component {
               console.log(error1);
               return;
             } else {
+              gc.protectAsset(atlasAsset, true);
               cc.loader.loadRes(`${file}_ske`, dragonBones.DragonBonesAsset, (error2: Error, dbAsset: dragonBones.DragonBonesAsset) => {
                 if (error2) {
                   console.log(error2);
                   return;
                 }
+                gc.protectAsset(dbAsset, true);
                 createDB(dbAsset, atlasAsset);
               });
             }
