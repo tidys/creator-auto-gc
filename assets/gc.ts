@@ -120,7 +120,7 @@ export class GC {
         continue;
       }
 
-      const diff = total - (node.latestFrame || total);
+      const diff = total - (node._latestFrame || total);
       const destroy = diff > this.opts.removeNodeLifeFrame;
       if (destroy) {
         cc.log("try remove node: ", node);
