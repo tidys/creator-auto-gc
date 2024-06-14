@@ -1,5 +1,3 @@
-import { gc } from "./gc";
-
 const { ccclass, property } = cc._decorator;
 const FontSize = 15;
 @ccclass
@@ -10,7 +8,9 @@ export default class NewClass extends cc.Component {
   @property(cc.SpriteFrame)
   frame: cc.SpriteFrame = null;
   protected onLoad(): void {
-    gc.init({
+    debugger;
+    // @ts-ignore
+    cc.gc.init({
       enable: true,
       cycleFrame: 0,
       textureEnable: true,
@@ -119,7 +119,7 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "scene 2",
+        name: "goto scene 2",
         cb: () => {
           cc.director.loadScene("2");
         },
@@ -197,6 +197,7 @@ export default class NewClass extends cc.Component {
             if (error) {
               return;
             } else {
+              // prefab的动态计数应该+1
               const ins = cc.instantiate(prefab);
               this.bgNode.addChild(ins);
             }
@@ -216,8 +217,10 @@ export default class NewClass extends cc.Component {
             comp.enableBatch = true;
             comp.armatureName = "armatureName";
             comp.animationName = "stand";
-            gc.protectAsset(dbAsset, false);
-            gc.protectAsset(atlasAsset, false);
+            // @ts-ignore
+            cc.gc.protectAsset(dbAsset, false);
+            // @ts-ignore
+            cc.gc.protectAsset(atlasAsset, false);
             comp.playAnimation(comp.animationName, 0);
             this.bgNode.addChild(db);
           };
@@ -226,13 +229,15 @@ export default class NewClass extends cc.Component {
               console.log(error1);
               return;
             } else {
-              gc.protectAsset(atlasAsset, true);
+              // @ts-ignore
+              cc.gc.protectAsset(atlasAsset, true);
               cc.loader.loadRes(`${file}_ske`, dragonBones.DragonBonesAsset, (error2: Error, dbAsset: dragonBones.DragonBonesAsset) => {
                 if (error2) {
                   console.log(error2);
                   return;
                 }
-                gc.protectAsset(dbAsset, true);
+                // @ts-ignore
+                cc.gc.protectAsset(dbAsset, true);
                 createDB(dbAsset, atlasAsset);
               });
             }
@@ -255,6 +260,10 @@ export default class NewClass extends cc.Component {
             cc.log(`invalid sprite atlas`);
           }
           const frame = this.testAtlas.getSpriteFrame("yu2");
+          if (!this.bgNode.isValid) {
+            cc.error(`invalid node`);
+            return;
+          }
           const spr = this.bgNode.getComponent(cc.Sprite);
           spr.spriteFrame = frame;
         },
