@@ -6132,13 +6132,25 @@ declare namespace cc {
 		Returns the url of this asset's native object, if none it will returns an empty string.
 		!#zh
 		返回该资源对应的目标平台资源的 URL，如果没有将返回一个空字符串。 */
-		nativeUrl: string;		
+    nativeUrl: string;		
+    /**
+     * 资源是否受保护
+     */
+    protect: boolean;
 		/** !#en
 		The number of reference
 		
 		!#zh
 		引用的数量 */
-		refCount: number;		
+    refCount: number;		
+    /**
+     * 动态引用的数量
+     */
+    dynamicRefCount: number;
+    /**
+     * 上次使用该资源的渲染帧
+     */
+    getLatestRenderFrame(): number;
 		/** !#en Indicates whether its dependent raw assets can support deferred load if the owner scene (or prefab) is marked as `asyncLoadAssets`.
 		!#zh 当场景或 Prefab 被标记为 `asyncLoadAssets`，禁止延迟加载该资源所依赖的其它原始资源。 */
 		static preventDeferredLoadDependents: boolean;		
