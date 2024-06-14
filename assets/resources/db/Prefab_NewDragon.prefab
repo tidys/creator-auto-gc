@@ -71,7 +71,6 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "latestFrame": 49930,
     "_id": ""
   },
   {
@@ -91,7 +90,7 @@
     "_animationName": "stand",
     "_preCacheMode": 0,
     "_cacheMode": 0,
-    "playTimes": -1,
+    "playTimes": 0,
     "premultipliedAlpha": false,
     "_armatureKey": "f301ce06-b55f-40dd-8546-15087f8fc333#b3c8f7b3-26d6-4974-88a5-1b190184f87d",
     "_accTime": 0,
