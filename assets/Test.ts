@@ -13,9 +13,9 @@ export default class NewClass extends cc.Component {
     cc.gc.init({
       enable: true,
       cycleFrame: 0,
-      textureEnable: true,
-      textureLimitCount: 1,
-      textureLifeFrame: 10,
+      assetEnable: true,
+      assetLimitCount: 1,
+      assetLifeFrame: 10,
       removeNodeEnable: false,
       removeNodeLimitCount: 1,
       removeNodeLifeFrame: 10,
