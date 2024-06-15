@@ -30,6 +30,8 @@ gc模块需要自定义JS引擎
 3. 设置`JavaScript引擎路径`后，并`保存`设置
 
     ![Alt text](custom-engine.png)
+    
+4. 重启creator自动编译JavaScript引擎。
 
 ## 接入/使用 说明
 
