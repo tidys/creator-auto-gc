@@ -138,6 +138,23 @@ sprite.spriteFrame = handleSpriteFrame; // 此时spriteFrame已经被释放了�
 
 目前底层没有合适的方法感知到资源被变量引用的情况，可以通过`JS Proxy`追踪到这种变量之间的相互引用。
 
+## 关于remove相关api的注意事项
+
+在creator中，需要特别注意一些api
+- node.removeFromParent()
+- node.removeAllChildren()
+- node.removeChild()
+- node.removeChildByTag()
+
+此类相关api仅仅是将node从场景中移除，但是并不会释放相关的内存，如果这些node没有被再次添加到场景中，那么这些node就会一直处于游离状态，`一直占用相关的内存`，直到主动调用`node.destroy()`。
+
+gc模块在`CC_DEBUG`模式下，提供了对游离状态节点的监控，可以通过`cc.pool.removeNodes.log()`查看。
+
+
+gc模块同时也提供了对这些游离状态节点的自动释放功能，`removeNodeEnable`选项正是为此而设计的。
+
+出于性能考虑目前仅在`CC_DEBUG`模式下生效，在正式发布版本时，请确保已经管理好游离状态的节点。
+
 
 ## 目前支持GC的资源类型
 -  cc.Prefab 
