@@ -117,6 +117,24 @@ cc.loader.loadRes(tex,(error, asset_tex)=>{
     })
 })
 ```
+## 动态加载Spine注意事项
+因为spine只需要动态加载一个资源，所以不需要对资源进行保护。
+```js
+cc.loader.loadRes(`spine/raptor-pro`, sp.SkeletonData, (error: Error, asset: sp.SkeletonData) => {
+    if (error) {
+        console.log(error);
+        return;
+    }
+    // cc.gc && cc.gc.protectAsset(asset, true); // 不需要
+    const node = new cc.Node("spine");
+    const spineComp = node.addComponent(sp.Skeleton);
+    spineComp.skeletonData = asset;
+    spineComp.animation = "walk";
+    spineComp.loop = true;
+    node.scale = 0.2;
+    scene.addChild(node);
+});
+```
 
 ## 资源使用特别注意事项
 
@@ -163,4 +181,5 @@ gc模块同时也提供了对这些游离状态节点的自动释放功能，`re
 -  cc.SpriteAtlas
 -  dragonBones.DragonBonesAsset 
 -  dragonBones.DragonBonesAtlasAsset 
+-  sp.SkeletonData
   

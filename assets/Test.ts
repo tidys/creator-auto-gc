@@ -8,7 +8,6 @@ export default class NewClass extends cc.Component {
   @property(cc.SpriteFrame)
   frame: cc.SpriteFrame = null;
   protected onLoad(): void {
-    debugger;
     // @ts-ignore
     cc.gc.init({
       enable: true,
@@ -246,7 +245,39 @@ export default class NewClass extends cc.Component {
       },
       {
         name: "test spine",
-        cb: () => {},
+        cb: () => {
+          const createSpine = (spine: sp.SkeletonData) => {
+            const node = new cc.Node("spine");
+            const spineComp = node.addComponent(sp.Skeleton);
+            spineComp.skeletonData = spine;
+            spineComp.animation = "walk";
+            spineComp.loop = true;
+            node.scale = 0.2;
+            this.bgNode.addChild(node);
+          };
+          cc.loader.loadRes(`spine/raptor-pro`, sp.SkeletonData, (error: Error, asset: sp.SkeletonData) => {
+            if (error) {
+              console.log(error);
+              return;
+            }
+            createSpine(asset);
+          });
+        },
+      },
+      {
+        name: "test spine prefab",
+        cb: () => {
+          cc.loader.loadRes("spine/raptor-pro", cc.Prefab, (error: Error, prefab: cc.Prefab) => {
+            if (error) {
+              return;
+            } else {
+              // prefab的动态计数应该+1
+              const ins = cc.instantiate(prefab);
+              ins.scale = 0.2;
+              this.bgNode.addChild(ins);
+            }
+          });
+        },
       },
       {
         name: "test spriteAtlas valid",
