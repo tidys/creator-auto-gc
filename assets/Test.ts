@@ -267,7 +267,7 @@ export default class NewClass extends cc.Component {
       {
         name: "test spine prefab",
         cb: () => {
-          cc.loader.loadRes("spine/raptor-pro", cc.Prefab, (error: Error, prefab: cc.Prefab) => {
+          cc.loader.loadRes("spine/Prefab_raptor-pro", cc.Prefab, (error: Error, prefab: cc.Prefab) => {
             if (error) {
               return;
             } else {
