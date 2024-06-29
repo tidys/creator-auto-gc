@@ -1,5 +1,5 @@
 const { ccclass, property } = cc._decorator;
-const FontSize = 15;
+const FontSize = 13;
 @ccclass
 export default class NewClass extends cc.Component {
   @property(cc.Node)
@@ -342,6 +342,62 @@ export default class NewClass extends cc.Component {
               audioSource.clip = audioClip;
               audioSource.play();
             }
+          });
+        },
+      },
+      {
+        name: "atlas animation",
+        cb: () => {
+          cc.loader.loadRes("yu", cc.SpriteAtlas, (error: Error, spriteAtlas: cc.SpriteAtlas) => {
+            if (error) {
+              console.log(error);
+            } else {
+              const node = new cc.Node();
+              const sprite = node.addComponent(cc.Sprite);
+              sprite.trim = false;
+              sprite.sizeMode = cc.Sprite.SizeMode.RAW;
+              const clip = cc.AnimationClip.createWithSpriteFrames(spriteAtlas.getSpriteFrames(), spriteAtlas.getSpriteFrames().length);
+              clip.name = "test";
+              clip.wrapMode = cc.WrapMode.Default;
+              clip.speed = 1;
+              clip.sample = spriteAtlas.getSpriteFrames().length;
+              const animation = node.addComponent(cc.Animation);
+              animation.addClip(clip);
+              animation.defaultClip = clip;
+              animation.play(clip.name);
+              animation.on("finished", () => {
+                console.log("finished");
+                node.destroy();
+              });
+              this.bgNode.addChild(node);
+            }
+          });
+        },
+      },
+      {
+        name: "animation clip",
+        cb: () => {
+          cc.loader.loadRes("prefab-link-ani-clip", cc.AnimationClip, (error: Error, clip: cc.AnimationClip) => {
+            if (error) {
+              console.log(error);
+              return;
+            }
+            // @ts-ignore
+            cc.gc.protectAsset(clip, true);
+            cc.loader.loadRes("prefab-test-ani-clip", cc.Prefab, (error: Error, prefab: cc.Prefab) => {
+              if (error) {
+                console.log(error);
+                return;
+              }
+              const node = cc.instantiate(prefab);
+              const animation = node.getComponent(cc.Animation);
+              animation.addClip(clip);
+              animation.defaultClip = clip;
+              animation.play(clip.name);
+              this.bgNode.addChild(node);
+              // @ts-ignore
+              cc.gc.protectAsset(clip, false);
+            });
           });
         },
       },
