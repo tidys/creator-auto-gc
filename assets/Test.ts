@@ -300,7 +300,25 @@ export default class NewClass extends cc.Component {
         },
       },
       {
-        name: "test spriteAtlas",
+        name: "test spriteAtlas-1",
+        cb: () => {
+          cc.loader.loadRes("yu", cc.SpriteAtlas, (error: Error, spriteAtlas: cc.SpriteAtlas) => {
+            if (error) {
+              console.log(error);
+            } else {
+              this.testAtlas = spriteAtlas;
+              // 这种方式会导致计数多一个, 因为Sprite.__preload的原因
+              const node = new cc.Node();
+              node.setPosition(Math.random() * 100, Math.random() * 100);
+              const sprite = node.addComponent(cc.Sprite);
+              sprite.spriteFrame = spriteAtlas.getSpriteFrame("yu1");
+              this.bgNode.addChild(node);
+            }
+          });
+        },
+      },
+      {
+        name: "test spriteAtlas-2",
         cb: () => {
           cc.loader.loadRes("yu", cc.SpriteAtlas, (error: Error, spriteAtlas: cc.SpriteAtlas) => {
             if (error) {
