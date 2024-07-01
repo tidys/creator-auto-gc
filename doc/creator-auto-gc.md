@@ -179,6 +179,7 @@ gc模块同时也提供了对这些游离状态节点的自动释放功能，`re
 -  cc.Texture2D  
 -  cc.SpriteFrame 
 -  cc.SpriteAtlas
+-  cc.AnimationClip
 -  dragonBones.DragonBonesAsset 
 -  dragonBones.DragonBonesAtlasAsset 
 -  sp.SkeletonData
