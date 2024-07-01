@@ -78,10 +78,13 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 7
+        "__id__": 9
       },
       {
-        "__id__": 8
+        "__id__": 10
+      },
+      {
+        "__id__": 11
       }
     ],
     "_prefab": null,
@@ -242,9 +245,14 @@
     "_components": [
       {
         "__id__": 6
+      },
+      {
+        "__id__": 7
       }
     ],
-    "_prefab": null,
+    "_prefab": {
+      "__id__": 8
+    },
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -255,8 +263,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 22.25,
-      "height": 50.4
+      "width": 111.23,
+      "height": 25.2
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -307,10 +315,10 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "2",
-    "_N$string": "2",
-    "_fontSize": 40,
-    "_lineHeight": 40,
+    "_string": "1234567890",
+    "_N$string": "1234567890",
+    "_fontSize": 20,
+    "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -324,6 +332,36 @@
     "_N$overflow": 0,
     "_N$cacheMode": 0,
     "_id": "d8752fpWBK8LYnLpK4/v77"
+  },
+  {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 5
+    },
+    "_enabled": true,
+    "_defaultClip": {
+      "__uuid__": "db0c69b3-70c6-4e7e-aad9-960a62e7e96e"
+    },
+    "_clips": [
+      {
+        "__uuid__": "db0c69b3-70c6-4e7e-aad9-960a62e7e96e"
+      }
+    ],
+    "playOnLoad": true,
+    "_id": "efsIw0ZJVAQ49qjmr5QTTy"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 5
+    },
+    "asset": {
+      "__uuid__": "922a1d5b-4bac-4110-abd8-bd718899171c"
+    },
+    "fileId": "",
+    "sync": false
   },
   {
     "__type__": "cc.Canvas",
@@ -368,5 +406,18 @@
     "_originalWidth": 0,
     "_originalHeight": 0,
     "_id": "29zXboiXFBKoIV4PQ2liTe"
+  },
+  {
+    "__type__": "aaa07cLQjNLa4xCxPDa6Bpw",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "prefab": {
+      "__uuid__": "922a1d5b-4bac-4110-abd8-bd718899171c"
+    },
+    "_id": "42fEFtCk1P4pp8MNEwiRye"
   }
 ]
