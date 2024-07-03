@@ -12,6 +12,7 @@ export default class NewClass extends cc.Component {
     // @ts-ignore
     cc.gc.init({
       enable: true,
+      memoryLimit: 100,
       cycleFrame: 0,
       assetEnable: true,
       assetLimitCount: 1,

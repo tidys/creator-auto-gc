@@ -54,3 +54,5 @@ Thumbs.db
 *.pdf
 settings/
 packages/creator-brother/
+packages/cocos-particle2d/
+export/

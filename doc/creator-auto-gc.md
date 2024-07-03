@@ -41,6 +41,8 @@ gc模块需要自定义JS引擎
     cc.gc && cc.gc.init({
         // 是否开启GC
         enable: true,
+        // 当游戏的纹理内存超过上限，就会触发gc行为，单位MB，默认500MB
+        memoryLimit: 500,
         // 每多少帧进行一次gc操作, <=0 意味着每一帧都会进行一次GC
         cycleFrame: 0,
         // 资源是否开启GC
@@ -63,7 +65,14 @@ gc模块需要自定义JS引擎
     ```js
     cc.gc && cc.gc.enable(true);
     ```
+## 查看游戏的纹理内存大小
+```js
+cc.debug.setDisplayStats(true)
+```
 
+显示`Profile`即可看到`TextureMemory`信息
+
+![Alt text](texture-memory.png)
 
 ## 预加载注意事项
 在预加载过程中，有时我们需要加载比较多的资源，但是这些资源并不会立刻被使用。
