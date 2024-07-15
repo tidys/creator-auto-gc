@@ -193,3 +193,34 @@ gc模块同时也提供了对这些游离状态节点的自动释放功能，`re
 -  dragonBones.DragonBonesAtlasAsset 
 -  sp.SkeletonData
   
+## 资源引用计数查看
+
+gc模块提供了简单的的引用计数查看
+
+![Alt text](ref-look.png)
+
+### frame
+
+游戏当前运行到的帧数
+
+### dynamic0：（重点关注）
+
+动态引用计数为0的资源，如果dynamicRef=0，但是没有释放，此时的staticRef肯定不为0，也就是说该资源在游戏制作过程中，被prefab/scene上的脚本所引用。
+
+分2种情况：
+- 制作prefab时，Sprite等内置组件引用了`asset`，这种情况暂时没有更好的解决办法。
+- `prefab/scene`中有个`property(CC.Asset)`指向了asset， 解决办法：将该资源改为使用`cc.loader.load`加载。
+
+
+### static0
+
+静态引用计数为0的资源，这里面的大部分资源都是通过`cc.loader.load`加载的游戏资源。
+
+### static0_dynamic0
+
+静态引用动态引用都为0的资源，这里面的大部分资源的frame都和游戏的当前帧一致，一般plist资源居多。
+
+
+### project
+
+非`internal`的游戏资源。
