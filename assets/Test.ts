@@ -27,6 +27,31 @@ export default class NewClass extends cc.Component {
     this.node.addChild(root);
     createButtons(root, [
       {
+        name: "mask",
+        cb: () => {
+          cc.resources.load("mask", cc.Prefab, (error, prefab) => {
+            if (error) {
+              console.error(error);
+              return;
+            }
+            const node = cc.instantiate(prefab);
+            this.bgNode.addChild(node);
+          });
+        },
+      },
+      {
+        name: "particle",
+        cb: () => {
+          cc.resources.load("New Particle", cc.Prefab, (error, prefab) => {
+            if (error) {
+              return;
+            }
+            const node = cc.instantiate(prefab);
+            this.bgNode.addChild(node);
+          });
+        },
+      },
+      {
         name: "logAssets",
         cb: () => {
           console.log(cc.assetManager.assets);
