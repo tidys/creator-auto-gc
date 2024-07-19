@@ -39,9 +39,11 @@ gc模块需要自定义JS引擎
 - 初始化
     ```js
     cc.gc && cc.gc.init({
+        // 是否开启log
+        log: false,
         // 是否开启GC
         enable: true,
-        // 当游戏的纹理内存超过上限，就会触发gc行为，单位MB，默认500MB
+        // 当游戏的统计内存超过上限，就会触发gc行为，单位MB，默认500MB
         memoryLimit: 500,
         // 每多少帧进行一次gc操作, <=0 意味着每一帧都会进行一次GC
         cycleFrame: 0,
@@ -65,14 +67,6 @@ gc模块需要自定义JS引擎
     ```js
     cc.gc && cc.gc.enable(true);
     ```
-## 查看游戏的纹理内存大小
-```js
-cc.debug.setDisplayStats(true)
-```
-
-显示`Profile`即可看到`TextureMemory`信息
-
-![Alt text](texture-memory.png)
 
 ## 预加载注意事项
 在预加载过程中，有时我们需要加载比较多的资源，但是这些资源并不会立刻被使用。
@@ -224,3 +218,18 @@ gc模块提供了简单的的引用计数查看
 ### project
 
 非`internal`的游戏资源。
+
+
+
+## 查看游戏的内存大小
+```js
+cc.debug.setDisplayStats(true)
+```
+
+显示`Profile`即可看到统计到的信息
+
+ - `TextureMemory`：游戏纹理占用的内存大小
+- MeshMemory: 游戏的Mesh占用的内存大小
+  
+    ![Alt text](texture-memory.png)
+ 

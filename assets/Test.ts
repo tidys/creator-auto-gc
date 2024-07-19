@@ -11,6 +11,7 @@ export default class NewClass extends cc.Component {
   protected onLoad(): void {
     // @ts-ignore
     cc.gc.init({
+      log: true,
       enable: true,
       memoryLimit: 100,
       cycleFrame: 0,
